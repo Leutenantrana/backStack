@@ -57,7 +57,7 @@ app.get('/', (request, respond) => {
     respond.json(notes)
 })
 
-let PORT = 1000
-
-app.listen(PORT)
-console.log(`Server running at port ${PORT}`)
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
+})
