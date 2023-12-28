@@ -59,7 +59,7 @@ app.post('/api/notes', (request, response) => {
     response.json(note)
 })
 
-app.get('/', (request, respond) => {
+app.get('/api/notes', (request, respond) => {
     respond.json(notes)
 })
 
