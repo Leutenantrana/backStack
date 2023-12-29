@@ -9,7 +9,7 @@ const password = process.argv[2]
 
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
-    `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+    `mongodb+srv://fullstack:Sagarrana119@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery', false)
 mongoose.connect(url)
