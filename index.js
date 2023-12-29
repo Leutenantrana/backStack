@@ -28,15 +28,21 @@ let notes = [{
 
 app.use(express.json())
 app.use(cors())
+
+app.get('/', (req, res) => {
+    res.send('<h1>Hello World!</h1>')
+})
+
+app.get('/api/notes', (req, res) => {
+    res.json(notes)
+})
+
 const generateId = () => {
     const maxId = notes.length > 0 ?
         Math.max(...notes.map(n => n.id)) :
         0
     return maxId + 1
 }
-
-
-
 
 app.post('/api/notes', (request, response) => {
     const body = request.body
@@ -49,7 +55,8 @@ app.post('/api/notes', (request, response) => {
 
     const note = {
         content: body.content,
-        important: Boolean(body.important) || false,
+        important: body.important || false,
+        date: new Date(),
         id: generateId(),
     }
 
@@ -58,8 +65,23 @@ app.post('/api/notes', (request, response) => {
     response.json(note)
 })
 
-app.get('/api/notes', (request, respond) => {
-    respond.json(notes)
+app.get('/api/notes/:id', (request, response) => {
+    const id = Number(request.params.id)
+    const note = notes.find(note => note.id === id)
+
+    if (note) {
+        response.json(note)
+    } else {
+        response.status(404).end()
+    }
+
+})
+
+app.delete('/api/notes/:id', (request, response) => {
+    const id = Number(request.params.id)
+    notes = notes.filter(note => note.id !== id)
+
+    response.status(204).end()
 })
 
 const PORT = process.env.PORT || 3001
