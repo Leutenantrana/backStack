@@ -6,7 +6,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "nodemon index.js",
-        "start": "PORT=3001 node index.js"
+        "start": "PORT=3011 node index.js"
     },
     "author": "sagarr",
     "license": "ISC",
