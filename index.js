@@ -3,6 +3,24 @@ const cors = require('cors')
 const app = express()
 app.use(express.static('dist'))
 
+const mongoose = require('mongoose')
+
+const password = process.argv[2]
+
+// DO NOT SAVE YOUR PASSWORD TO GITHUB!!
+const url =
+    `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+
+mongoose.set('strictQuery', false)
+mongoose.connect(url)
+
+const noteSchema = new mongoose.Schema({
+    content: String,
+    important: Boolean,
+})
+
+const Note = mongoose.model('Note', noteSchema)
+
 const requestLogger = (request, response, next) => {
     console.log('Method:', request.method)
     console.log('Path:  ', request.path)
@@ -49,9 +67,12 @@ app.get('/', (req, res) => {
     res.send('<h1>Hello World!</h1>')
 })
 
-app.get('/api/notes', (req, res) => {
-    res.json(notes)
+app.get('/api/notes', (request, response) => {
+    Note.find({}).then(notes => {
+        response.json(notes)
+    })
 })
+
 
 const generateId = () => {
     const maxId = notes.length > 0 ?
