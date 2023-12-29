@@ -9,7 +9,7 @@ const password = process.argv[2]
 
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
-    `mongodb+srv://fullstack:Sagarrana119@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+    `mongodb+srv://ranasagar974:${password}@cluster0.6pjuww7.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery', false)
 mongoose.connect(url)
@@ -71,6 +71,7 @@ app.get('/api/notes', (request, response) => {
     Note.find({}).then(notes => {
         response.json(notes)
     })
+    mongoose.connection.close()
 })
 
 
