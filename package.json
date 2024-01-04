@@ -8,9 +8,10 @@
         "dev": "nodemon index.js Sagarrana119",
         "start": "PORT=3011 node index.js",
         "build:ui": "rm -rf dist && cd ../frontend && npm run build && cp -r dist ../backend",
-        "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push"
+        "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
+        "lint": "eslint ."
     },
-    "author": "sagarr",
+    "author": "sagar",
     "license": "ISC",
     "dependencies": {
         "cors": "^2.8.5",
@@ -19,6 +20,7 @@
         "mongoose": "^8.0.3"
     },
     "devDependencies": {
+        "eslint": "^8.56.0",
         "nodemon": "^3.0.2"
     }
 }
